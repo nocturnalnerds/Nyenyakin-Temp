@@ -8,7 +8,7 @@ const Articlebento = () => {
 
   const handleArticleClick = (articleId) => {
     // Navigate to specific article
-    window.location.href = `/tips/${articleId}`;
+    window.location.href = `/tips`;
   };
 
   const articles = [
@@ -44,7 +44,7 @@ const Articlebento = () => {
       id: 'exercise-and-sleep',
       title: 'How Exercise Improves Sleep (And When to Do It)',
       category: 'Read on Sleep Tips',
-      image: 'https://brooksrunningindia.com/cdn/shop/articles/S24_JULY_MUNICH_1-0E9A3925_1296x.jpg?v=1706158917',
+      image: 'https://domf5oio6qrcr.cloudfront.net/medialibrary/2293/conversions/l0908b16207233934035-thumb.jpg',
       className: 'col-span-1'
     }
   ];
@@ -90,7 +90,7 @@ const Articlebento = () => {
 
           <div
             className="relative rounded-xl overflow-hidden cursor-pointer transform hover:scale-105 transition-transform duration-300"
-            onClick={() => handleArticleClick(articles[1].id)}
+            onClick={() => handleArticleClick(articles[0].id)}
           >
             <img
               src={articles[1].image}
@@ -110,7 +110,7 @@ const Articlebento = () => {
 
           <div
             className="relative rounded-xl overflow-hidden cursor-pointer transform hover:scale-105 transition-transform duration-300"
-            onClick={() => handleArticleClick(articles[2].id)}
+            onClick={() => handleArticleClick(articles[0].id)}
           >
             <img
               src={articles[2].image}
@@ -130,7 +130,7 @@ const Articlebento = () => {
 
           <div
             className="relative rounded-xl overflow-hidden cursor-pointer transform hover:scale-105 transition-transform duration-300"
-            onClick={() => handleArticleClick(articles[3].id)}
+            onClick={() => handleArticleClick(articles[0].id)}
           >
             <img
               src={articles[3].image}
@@ -150,7 +150,7 @@ const Articlebento = () => {
 
           <div
             className="relative rounded-xl overflow-hidden cursor-pointer transform hover:scale-105 transition-transform duration-300"
-            onClick={() => handleArticleClick(articles[4].id)}
+            onClick={() => handleArticleClick(articles[0].id)}
           >
             <img
               src={articles[4].image}
