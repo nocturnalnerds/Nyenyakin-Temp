@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Good from '../pages/Goodpage';
+import Bad from '../pages/Badpage';
+
 
 const PSQITestPage = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [formData, setFormData] = useState({
     gender: '',
     age: '',
@@ -55,24 +63,77 @@ const PSQITestPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateInputs()) {
       alert('Please complete all required fields correctly.');
       return;
     }
 
-    console.log('Form data to send:', formData);
-    // Uncomment when backend is ready
-    /*
-    fetch('http://localhost:5000/api/psqi-test', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    })
-      .then(response => response.json())
-      .then(data => console.log('Success:', data))
-      .catch(error => console.error('Error:', error));
-    */
+    setIsLoading(true);
+
+    try {
+      console.log('Form data to send:', formData);
+      
+      const response = await fetch('http://localhost:5000/api/psqi-test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Backend response:', data);
+
+      // Check if there's an error in the response
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Navigate based on the result from backend
+      if (data.result) {
+        console.log('Navigating based on result:', data.result);
+        if (data.result.toLowerCase() === 'good') {
+          console.log('Navigating to /good');
+          navigate('/good');
+          return; // Important: return to prevent further execution
+        } else if (data.result.toLowerCase() === 'bad') {
+          console.log('Navigating to /bad');
+          navigate('/bad');
+          return;
+        }
+      } 
+      
+      if (data.prediction !== undefined) {
+        console.log('Navigating based on prediction:', data.prediction);
+        if (data.prediction === 0) {
+          console.log('Navigating to /good (prediction 0)');
+          navigate('/good');
+          return;
+        } else {
+          console.log('Navigating to /bad (prediction 1)');
+          navigate('/bad');
+          return;
+        }
+      }
+
+      // If we reach here, something went wrong
+      console.warn('No valid result found in response:', data);
+      alert('Test completed, but unable to determine result. Please try again.');
+
+    } catch (error) {
+      console.error('Error details:', error);
+      alert(`Error: ${error.message}. Please check the console for details.`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputClass = (name) =>
@@ -109,6 +170,7 @@ const PSQITestPage = () => {
                     key={gender}
                     onClick={() => handleRadioChange('gender', gender)}
                     className={radioClass('gender', gender)}
+                    disabled={isLoading}
                   >
                     {gender}
                   </button>
@@ -136,6 +198,7 @@ const PSQITestPage = () => {
                   onChange={handleInputChange}
                   placeholder={`Enter ${label.toLowerCase()}`}
                   className={inputClass(name)}
+                  disabled={isLoading}
                 />
                 {errors[name] && <p className="text-red-400 text-sm mt-1 text-center">{errors[name]}</p>}
               </div>
@@ -150,6 +213,7 @@ const PSQITestPage = () => {
                     key={status}
                     onClick={() => handleRadioChange('maritalStatus', status)}
                     className={radioClass('maritalStatus', status)}
+                    disabled={isLoading}
                   >
                     {status}
                   </button>
@@ -167,6 +231,7 @@ const PSQITestPage = () => {
                     key={val}
                     onClick={() => handleRadioChange('neckPain', val)}
                     className={radioClass('neckPain', val)}
+                    disabled={isLoading}
                   >
                     {val}
                   </button>
@@ -184,6 +249,7 @@ const PSQITestPage = () => {
                     key={val}
                     onClick={() => handleRadioChange('headache', val)}
                     className={radioClass('headache', val)}
+                    disabled={isLoading}
                   >
                     {val}
                   </button>
@@ -195,10 +261,22 @@ const PSQITestPage = () => {
             {/* Submit */}
             <div className="flex justify-center pt-4">
               <button
-                //onClick={handleSubmit}
-                className="px-12 py-3 bg-blue-500 text-white rounded-full font-medium hover:bg-blue-600 transition-all duration-300 hover:shadow-lg"
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className={`px-12 py-3 rounded-full font-medium transition-all duration-300 ${
+                  isLoading
+                    ? 'bg-gray-500 text-gray-300 cursor-not-allowed'
+                    : 'bg-blue-500 text-white hover:bg-blue-600 hover:shadow-lg'
+                }`}
               >
-                Check
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  'Check'
+                )}
               </button>
             </div>
           </div>
