@@ -30,7 +30,7 @@ const Navbar = ({ currentPage = 'home' }) => {
         >
           <img
             src="/logo.svg"
-            alt="Menyakin Logo"
+            alt="Nyenyakin Logo"
             className="w-16 h-16"
           />
         </div>
