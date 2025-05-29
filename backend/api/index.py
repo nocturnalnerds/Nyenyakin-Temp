@@ -1,8 +1,10 @@
 import pickle
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 
-with open('model.pkl', 'rb') as f:
+model_path = os.path.join(os.path.dirname(__file__), '..', 'model.pkl')
+with open(model_path, 'rb') as f:
     scaler, model = pickle.load(f)
 
 app = Flask(__name__)
@@ -46,6 +48,3 @@ def predict():
 @app.route('/api/hello', methods=['GET'])
 def hello():
     return jsonify({'message': 'Hello, world!'})
-
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
