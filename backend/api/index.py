@@ -36,15 +36,21 @@ def preprocess_data(data):
 
 @app.route('/api/psqi-test', methods=['POST'])
 def predict():
-    data = request.json
-    input_features = preprocess_data(data)
-    # print(input_features)
-    input_features = scaler.transform(input_features)
-    # print(input_features)
-    prediction = model.predict(input_features)[0]
-    # print(prediction)
-    return jsonify({'prediction': str(prediction)})
+    try:
+        data = request.json
+        input_features = preprocess_data(data)
+        input_features = scaler.transform(input_features)
+        prediction = model.predict(input_features)[0]
+        return jsonify({'prediction': str(prediction)})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/hello', methods=['GET'])
 def hello():
-    return jsonify({'message': 'Hello, world!'})
+    try:
+        return jsonify({'message': 'Hello, world!'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+def handler(environ, start_response):
+    return app.wsgi_app(environ, start_response)
