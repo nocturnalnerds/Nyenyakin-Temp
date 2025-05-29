@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'; // pastikan sudah install @heroicons/react
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 const Navbar = ({ currentPage = 'home' }) => {
   const [hoveredItem, setHoveredItem] = useState(null);
