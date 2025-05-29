@@ -14,7 +14,7 @@ const Navbar = ({ currentPage = 'home' }) => {
   ];
 
   const handleLogoClick = () => {
-    const welcomeSection = document.getElementById('welcome-banner');
+    const welcomeSection = window.location.href = `/`;
     if (welcomeSection) {
       welcomeSection.scrollIntoView({ behavior: 'smooth' });
     }

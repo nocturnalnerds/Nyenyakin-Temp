@@ -113,7 +113,7 @@ const PSQITestPage = () => {
       
       if (data.prediction !== undefined) {
         console.log('Navigating based on prediction:', data.prediction);
-        if (data.prediction === 0) {
+        if (data.prediction === "0") {
           console.log('Navigating to /good (prediction 0)');
           navigate('/good');
           return;
@@ -124,7 +124,7 @@ const PSQITestPage = () => {
         }
       }
 
-      // If we reach here, something went wrong
+      //debuging 
       console.warn('No valid result found in response:', data);
       alert('Test completed, but unable to determine result. Please try again.');
 

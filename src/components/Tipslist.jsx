@@ -4,60 +4,59 @@ const TipsHomepage = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [visibleArticles, setVisibleArticles] = useState(6);
 
-  // Sample article data - replace with your actual data
 const articles = [
   {
     id: 1,
-    title: "Avoid Screens Before Bed",
+    title: "Reasons You Should Avoid Screens Before Bedtime",
     description: "Blue light from phones and computers can disrupt melatonin production. Avoid screens at least 1 hour before bedtime.",
-    author: "Dr. Lina Hartono",
+    author: "WebMD",
     image: "https://www.sleepmattersperth.com.au/wp-content/uploads/SEE-screens-before-bed.jpeg",
-    link: "/article/1",
+    link: "https://www.webmd.com/eye-health/video/video-eyes-screens-bed",
     category: "all"
   },
   {
     id: 2,
     title: "Create a Sleep Routine",
     description: "Going to bed and waking up at the same time daily helps regulate your internal body clock for better sleep quality.",
-    author: "Dr. Iqbal Ramadhan",
+    author: "CAO Office",
     image: "https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/03bca94a-90fc-4672-92fb-ceeee11cde3f/Bedtime+routine+for+adults3x2.jpg",
-    link: "/article/2",
+    link: "https://hr.wustl.edu/creating-a-sleep-routine-6-steps-to-better-sleep/",
     category: "good"
   },
   {
     id: 3,
-    title: "Limit Caffeine in the Evening",
+    title: "Caffeine and Sleep Problems",
     description: "Avoid coffee, tea, or energy drinks after 4 PM to prevent interference with your sleep cycle.",
-    author: "Dr. Maya Kusumo",
+    author: "Danielle Pacheco",
     image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=400&h=300&fit=crop",
-    link: "/article/3",
+    link: "https://www.sleepfoundation.org/nutrition/caffeine-and-sleep",
     category: "poor"
   },
   {
     id: 4,
-    title: "Exercise Regularly",
+    title: "Exercising for Better Sleep",
     description: "Regular physical activity can help you fall asleep faster and enjoy deeper sleep.",
-    author: "Dr. Surya Wijaya",
+    author: "Johns Hopkinds Medicine",
     image: "https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=400&h=300&fit=crop",
-    link: "/article/4",
+    link: "https://www.hopkinsmedicine.org/health/wellness-and-prevention/exercising-for-better-sleep",
     category: "good"
   },
   {
     id: 5,
-    title: "Avoid Heavy Meals Before Bed",
+    title: "Does eating before bed affect your sleep?",
     description: "Eating heavy or spicy food before bed can cause indigestion and interfere with sleep quality.",
-    author: "Dr. Citra Manik",
+    author: "Dr. Chris Mosunic, PhD, RD, MBA",
     image: "https://images.unsplash.com/photo-1506354666786-959d6d497f1a?w=400&h=300&fit=crop",
-    link: "/article/5",
+    link: "https://www.calm.com/blog/eating-before-bed",
     category: "poor"
   },
   {
     id: 6,
-    title: "Keep Your Bedroom Cool and Dark",
+    title: "How To Cool Down a Room At Night For Your Best Sleep",
     description: "A comfortable sleep environment with low light and cool temperature promotes better rest.",
-    author: "Dr. Bambang Darmawan",
+    author: "Jessica Timmons",
     image: "https://www.nestbedding.com/cdn/shop/articles/dark_bedroom_at_night_10806ccc-8468-4fd1-928b-3158322b8a8e_2310x.jpg?v=1574245656",
-    link: "/article/6",
+    link: "https://sleepopolis.com/education/cool-bedroom-great-sleep/",
     category: "all"
   },
   {
@@ -71,20 +70,20 @@ const articles = [
   },
   {
     id: 8,
-    title: "Reduce Alcohol Consumption",
+    title: "Alcohol and Sleep",
     description: "Alcohol may make you sleepy, but it disrupts sleep stages and lowers overall sleep quality.",
-    author: "Dr. Aditya Mahendra",
+    author: "Lucy Bryan",
     image: "https://cdn.aarp.net/content/dam/aarpe/en/home/health/healthy-living/how-to-cut-back-on-drinking/_jcr_content/root/container_main/container_body_main/container_body1/container_body_cf/container_image/articlecontentfragment/cfimage.coreimg.50.932.jpeg/content/dam/aarp/health/healthy-living/2020/01/1140-hand-stopping-drink.jpg",
-    link: "/article/8",
+    link: "https://www.sleepfoundation.org/nutrition/alcohol-and-sleep#:~:text=Experts%20recommend%20avoiding%20alcohol%20at,and%20overall%20low%2Dquality%20sleep.",
     category: "poor"
   },
   {
     id: 9,
-    title: "Keep a Sleep Diary",
+    title: "Keeping a Sleep Diary",
     description: "Track your sleep patterns and habits to identify issues and improve your sleep over time.",
-    author: "Dr. Nina Alamsyah",
+    author: "Stephanie Watson",
     image: "https://journey.cloud/content_assets/journal/closeup-hands-writing-journal.jpg",
-    link: "/article/9",
+    link: "https://www.webmd.com/sleep-disorders/how-to-use-a-sleep-diary",
     category: "all"
   }
 ];
